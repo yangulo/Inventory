@@ -1,6 +1,5 @@
 package com.example.android.torresinventario;
 
-
 import android.content.ContentValues;
 import android.net.Uri;
 import android.os.Bundle;
@@ -94,7 +93,6 @@ public class EditorActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "insert product successful", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     public boolean dataValidation

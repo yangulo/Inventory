@@ -196,7 +196,6 @@ public class ProductProvider extends ContentProvider {
     }
 
     public Product retriveProduct(Cursor cursor) {
-        //cursor.getColumnNames()
         int id = cursor.getInt(cursor.getColumnIndex(ProductContract.ProductEntry._ID));
         String name = cursor.getString(cursor.getColumnIndex(ProductContract.ProductEntry.COLUMN_PRODUCT_NAME));
         String description = cursor.getString(cursor.getColumnIndex(ProductContract.ProductEntry.COLUMN_PRODUCT_DESCRIPTION));
@@ -224,7 +223,6 @@ public class ProductProvider extends ContentProvider {
         Integer quantity = values.getAsInteger(ProductContract.ProductEntry.COLUMN_PRODUCT_QUANTITY);
         Integer purchaseQuantity = values.getAsInteger(ProductContract.ProductEntry.COLUMN_PRODUCT_PURCHASE_QUANTITY);
 
-
         SQLiteDatabase database = mProductDbHelper.getWritableDatabase();
         long id = database.insert(ProductContract.ProductEntry.TABLE_NAME, null, values);
         if (id == -1) {
@@ -234,5 +232,4 @@ public class ProductProvider extends ContentProvider {
         getContext().getContentResolver().notifyChange(uri, null);
         return ContentUris.withAppendedId(uri, id);
     }
-
 }

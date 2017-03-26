@@ -19,7 +19,7 @@ public class Product implements Serializable {
         this.quantityToPurchase = quantityToPurchase;
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 

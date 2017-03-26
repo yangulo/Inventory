@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-
 public class ProductDbHelper extends SQLiteOpenHelper {
 
     //Name of the database file.
@@ -22,15 +21,15 @@ public class ProductDbHelper extends SQLiteOpenHelper {
         // Create a String that contains the SQL statement to create the pets table.
         String SQL_CREATE_PRODUCT_INFORMATION_TABLE =
                 "CREATE TABLE " + ProductContract.ProductEntry.TABLE_NAME
-                + " ("
-                + ProductContract.ProductEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + ProductContract.ProductEntry.PRODUCT_IMAGE_ID + " INTEGER, "
-                + ProductContract.ProductEntry.COLUMN_PRODUCT_NAME + " TEXT NOT NULL, "
-                + ProductContract.ProductEntry.COLUMN_PRODUCT_DESCRIPTION + " TEXT NOT NULL, "
-                + ProductContract.ProductEntry.COLUMN_PRODUCT_PRICE + " INTEGER NOT NULL, "
-                + ProductContract.ProductEntry.COLUMN_PRODUCT_QUANTITY + " INTEGER NOT NULL, "
-                + ProductContract.ProductEntry.COLUMN_PRODUCT_PURCHASE_QUANTITY + " INTEGER NOT NULL"
-                + ");";
+                        + " ("
+                        + ProductContract.ProductEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                        + ProductContract.ProductEntry.PRODUCT_IMAGE_ID + " INTEGER, "
+                        + ProductContract.ProductEntry.COLUMN_PRODUCT_NAME + " TEXT NOT NULL, "
+                        + ProductContract.ProductEntry.COLUMN_PRODUCT_DESCRIPTION + " TEXT NOT NULL, "
+                        + ProductContract.ProductEntry.COLUMN_PRODUCT_PRICE + " INTEGER NOT NULL, "
+                        + ProductContract.ProductEntry.COLUMN_PRODUCT_QUANTITY + " INTEGER NOT NULL, "
+                        + ProductContract.ProductEntry.COLUMN_PRODUCT_PURCHASE_QUANTITY + " INTEGER NOT NULL"
+                        + ");";
         db.execSQL(SQL_CREATE_PRODUCT_INFORMATION_TABLE);
     }
 
