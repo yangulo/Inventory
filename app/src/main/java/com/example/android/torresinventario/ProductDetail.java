@@ -90,8 +90,11 @@ public class ProductDetail extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/html");
         intent.putExtra(Intent.EXTRA_EMAIL, "emailaddress@emailaddress.com");
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Place Order");
-        intent.putExtra(Intent.EXTRA_TEXT, "This is the body of the product order");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Place Order for " + product.getName() + ".");
+        intent.putExtra(Intent.EXTRA_TEXT,
+                "Product Name: " + product.getName() + "\n" +
+                        "Product Description: " + product.getDescription() + "\n" +
+                        "Product Price: " + product.getPrice() + "\n" + "Quantity to Purchase: " + product.getQuantityToPurchase());
 
         startActivity(Intent.createChooser(intent, "Send Email"));
 
@@ -107,7 +110,7 @@ public class ProductDetail extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 String id = ProductContract.ProductEntry._ID + " = " + product.getId();
                 getContentResolver().delete(ProductContract.ProductEntry.CONTENT_URI, id, null);
-                Intent intent = new Intent(ProductDetail.this, Inventary.class);
+                Intent intent = new Intent(ProductDetail.this, Inventory.class);
                 startActivity(intent);
             }
         });

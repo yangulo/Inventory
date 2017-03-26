@@ -5,7 +5,7 @@
     android:id="@+id/activity_torres_inventario"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.android.torresinventario.Inventary">
+    tools:context="com.example.android.torresinventario.Inventory">
 
     <ListView
         android:id="@+id/list"

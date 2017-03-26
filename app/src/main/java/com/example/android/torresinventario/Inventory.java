@@ -14,18 +14,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.android.torresinventario.data.Product;
 import com.example.android.torresinventario.data.ProductContract;
-import com.example.android.torresinventario.data.ProductProvider;
 
-public class Inventary extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
-    public static final String LOG_TAG = Inventary.class.getSimpleName();
+public class Inventory extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+    public static final String LOG_TAG = Inventory.class.getSimpleName();
     private static final int PRODUCT_LOADER = 0;
     private ProductCursorAdapter mProductCursorAdapter;
-    private ProductProvider mProductProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +33,7 @@ public class Inventary extends AppCompatActivity implements LoaderManager.Loader
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Inventary.this, EditorActivity.class);
+                Intent intent = new Intent(Inventory.this, EditorActivity.class);
                 startActivity(intent);
             }
         });
@@ -49,19 +45,6 @@ public class Inventary extends AppCompatActivity implements LoaderManager.Loader
         mProductCursorAdapter = new ProductCursorAdapter(this, null);
         listView.setAdapter(mProductCursorAdapter);
         getLoaderManager().initLoader(PRODUCT_LOADER, null, this);
-
-        mProductProvider = new ProductProvider();
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Cursor cursor = (Cursor) mProductCursorAdapter.getItem(position);
-                Product product = mProductProvider.retriveProduct(cursor);
-                Intent intent = new Intent(view.getContext(), ProductDetail.class);
-                intent.putExtra("product", product);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override
@@ -105,7 +88,7 @@ public class Inventary extends AppCompatActivity implements LoaderManager.Loader
 
     private void deleteAllEntries() {
         int rowsDeleted = getContentResolver().delete(ProductContract.ProductEntry.CONTENT_URI, null, null);
-        Log.v("Inventary", rowsDeleted + " rows deleted from ProductInventory database");
+        Log.v("Inventory", rowsDeleted + " rows deleted from ProductInventory database");
     }
 
     @Override
