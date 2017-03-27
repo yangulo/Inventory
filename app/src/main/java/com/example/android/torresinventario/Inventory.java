@@ -75,7 +75,7 @@ public class Inventory extends AppCompatActivity implements LoaderManager.Loader
     private void insertProduct() {
         // Create a ContentValues object where column names are the keys
         ContentValues values = new ContentValues();
-        values.put(ProductContract.ProductEntry.PRODUCT_IMAGE_ID, "");
+        values.put(ProductContract.ProductEntry.COLUMN_PRODUCT_IMAGE, "");
         values.put(ProductContract.ProductEntry.COLUMN_PRODUCT_NAME, "Castrol Oil");
         values.put(ProductContract.ProductEntry.COLUMN_PRODUCT_DESCRIPTION, "Car Oil");
         values.put(ProductContract.ProductEntry.COLUMN_PRODUCT_PRICE, "20");
@@ -96,7 +96,8 @@ public class Inventory extends AppCompatActivity implements LoaderManager.Loader
 
         // Define a projection that specifies the columns from the table we care about.
         String[] projection = {
-                ProductContract.ProductEntry._ID,
+                ProductContract.ProductEntry.COLUMN_PRODUCT_ID,
+                ProductContract.ProductEntry.COLUMN_PRODUCT_IMAGE,
                 ProductContract.ProductEntry.COLUMN_PRODUCT_NAME,
                 ProductContract.ProductEntry.COLUMN_PRODUCT_DESCRIPTION,
                 ProductContract.ProductEntry.COLUMN_PRODUCT_PRICE,

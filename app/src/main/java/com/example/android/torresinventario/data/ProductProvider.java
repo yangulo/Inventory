@@ -55,7 +55,7 @@ public class ProductProvider extends ContentProvider {
                 break;
 
             case PRODUCTS_ID:
-                selection = ProductContract.ProductEntry._ID + "=?";
+                selection = ProductContract.ProductEntry.COLUMN_PRODUCT_ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 cursor = database.query(ProductContract.ProductEntry.TABLE_NAME, projection, selection, selectionArgs,
                         null, null, sortOrder);
@@ -99,7 +99,7 @@ public class ProductProvider extends ContentProvider {
                 break;
             case PRODUCTS_ID:
                 // Delete a single row given by the ID in the URI
-                selection = ProductContract.ProductEntry._ID + "=?";
+                selection = ProductContract.ProductEntry.COLUMN_PRODUCT_ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 rowsDeleted = database.delete(ProductContract.ProductEntry.TABLE_NAME, selection, selectionArgs);
                 break;
@@ -128,7 +128,7 @@ public class ProductProvider extends ContentProvider {
                 // For the PET_ID code, extract out the ID from the URI,
                 // so we know which row to update. Selection will be "_id=?" and selection
                 // arguments will be a String array containing the actual ID.
-                selection = ProductContract.ProductEntry._ID + "=?";
+                selection = ProductContract.ProductEntry.COLUMN_PRODUCT_ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 return updateProduct(uri, contentValues, selection, selectionArgs);
             default:
@@ -196,14 +196,15 @@ public class ProductProvider extends ContentProvider {
     }
 
     public Product retriveProduct(Cursor cursor) {
-        int id = cursor.getInt(cursor.getColumnIndex(ProductContract.ProductEntry._ID));
+        int id = cursor.getInt(cursor.getColumnIndex(ProductContract.ProductEntry.COLUMN_PRODUCT_ID));
+        String image = cursor.getString(cursor.getColumnIndex(ProductContract.ProductEntry.COLUMN_PRODUCT_IMAGE));
         String name = cursor.getString(cursor.getColumnIndex(ProductContract.ProductEntry.COLUMN_PRODUCT_NAME));
         String description = cursor.getString(cursor.getColumnIndex(ProductContract.ProductEntry.COLUMN_PRODUCT_DESCRIPTION));
         int price = cursor.getInt(cursor.getColumnIndex(ProductContract.ProductEntry.COLUMN_PRODUCT_PRICE));
         int stock = cursor.getInt(cursor.getColumnIndex(ProductContract.ProductEntry.COLUMN_PRODUCT_QUANTITY));
         int quantityToPurchase = cursor.getInt(cursor.getColumnIndex(ProductContract.ProductEntry.COLUMN_PRODUCT_PURCHASE_QUANTITY));
 
-        Product product = new Product(id, name, description, price, stock, quantityToPurchase);
+        Product product = new Product(id, image, name, description, price, stock, quantityToPurchase);
         return product;
     }
 

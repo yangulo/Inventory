@@ -67,7 +67,7 @@ public class ProductCursorAdapter extends CursorAdapter {
             @Override
             public void onClick(View v) {
                 if (product.getStock() != 0) {
-                    String id = ProductContract.ProductEntry._ID + " = " + product.getId();
+                    String id = ProductContract.ProductEntry.COLUMN_PRODUCT_ID + " = " + product.getId();
                     product.sale();
 
                     ContentValues values = new ContentValues();

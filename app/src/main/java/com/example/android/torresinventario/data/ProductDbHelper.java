@@ -22,8 +22,8 @@ public class ProductDbHelper extends SQLiteOpenHelper {
         String SQL_CREATE_PRODUCT_INFORMATION_TABLE =
                 "CREATE TABLE " + ProductContract.ProductEntry.TABLE_NAME
                         + " ("
-                        + ProductContract.ProductEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                        + ProductContract.ProductEntry.PRODUCT_IMAGE_ID + " INTEGER, "
+                        + ProductContract.ProductEntry.COLUMN_PRODUCT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                        + ProductContract.ProductEntry.COLUMN_PRODUCT_IMAGE + " TEXT, "
                         + ProductContract.ProductEntry.COLUMN_PRODUCT_NAME + " TEXT NOT NULL, "
                         + ProductContract.ProductEntry.COLUMN_PRODUCT_DESCRIPTION + " TEXT NOT NULL, "
                         + ProductContract.ProductEntry.COLUMN_PRODUCT_PRICE + " INTEGER NOT NULL, "

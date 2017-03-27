@@ -19,7 +19,6 @@ import android.widget.Toast;
 import com.example.android.torresinventario.data.Product;
 import com.example.android.torresinventario.data.ProductContract;
 
-
 public class ProductDetail extends AppCompatActivity {
 
     public static final String LOG_TAG = ProductDetail.class.getSimpleName();
@@ -43,6 +42,11 @@ public class ProductDetail extends AppCompatActivity {
         TextView textViewQuantityToPurchase = (TextView) findViewById(R.id.product_detail_quantity_to_purcahse);
         mImageView = (ImageView) findViewById(R.id.product_picture);
 
+        if (product.getImageUri() != null && product.getImageUri().length() > 0) {
+            mUri = Uri.parse(product.getImageUri());
+            mImageView.setImageURI(mUri);
+        }
+
         textViewName.setText(product.getName());
         textViewDescription.setText(product.getDescription());
         textViewPrice.setText(product.getPrice() + ""); //+"" define a new string on the fly -instead of toString
@@ -59,7 +63,7 @@ public class ProductDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (product.getStock() != 0) {
-                    String id = ProductContract.ProductEntry._ID + " = " + product.getId();
+                    String id = ProductContract.ProductEntry.COLUMN_PRODUCT_ID + " = " + product.getId();
                     product.sale();
 
                     ContentValues values = new ContentValues();
@@ -73,7 +77,7 @@ public class ProductDetail extends AppCompatActivity {
         receive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String id = ProductContract.ProductEntry._ID + " = " + product.getId();
+                String id = ProductContract.ProductEntry.COLUMN_PRODUCT_ID + " = " + product.getId();
                 product.receive();
 
                 ContentValues values = new ContentValues();
@@ -127,7 +131,7 @@ public class ProductDetail extends AppCompatActivity {
         alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String id = ProductContract.ProductEntry._ID + " = " + product.getId();
+                String id = ProductContract.ProductEntry.COLUMN_PRODUCT_ID + " = " + product.getId();
                 getContentResolver().delete(ProductContract.ProductEntry.CONTENT_URI, id, null);
                 Intent intent = new Intent(ProductDetail.this, Inventory.class);
                 startActivity(intent);
@@ -175,6 +179,10 @@ public class ProductDetail extends AppCompatActivity {
                 mUri = resultData.getData();
                 Log.i(LOG_TAG, "Uri: " + mUri.toString());
 
+                String id = ProductContract.ProductEntry.COLUMN_PRODUCT_ID + " = " + product.getId();
+                ContentValues values = new ContentValues();
+                values.put(ProductContract.ProductEntry.COLUMN_PRODUCT_IMAGE, mUri.toString());
+                getContentResolver().update(ProductContract.ProductEntry.CONTENT_URI, values, id, null);
                 mImageView.setImageURI(mUri);
             }
         }

@@ -27,8 +27,8 @@ public final class ProductContract {
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_PRODUCT_INFORMATION;
 
         public static final String TABLE_NAME = "ProductInformation";
-        public static final String _ID = BaseColumns._ID;
-        public static final String PRODUCT_IMAGE_ID = "ImageID";
+        public static final String COLUMN_PRODUCT_ID = BaseColumns._ID;
+        public static final String COLUMN_PRODUCT_IMAGE = "ImageID";
         public static final String COLUMN_PRODUCT_NAME = "Name";
         public static final String COLUMN_PRODUCT_DESCRIPTION = "Description";
         public static final String COLUMN_PRODUCT_PRICE = "Price";
