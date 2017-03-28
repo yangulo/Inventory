@@ -1,17 +1,14 @@
 package com.example.android.torresinventario;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,8 +18,6 @@ import com.example.android.torresinventario.data.ProductContract;
 
 public class ProductDetail extends AppCompatActivity {
 
-    public static final String LOG_TAG = ProductDetail.class.getSimpleName();
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
     private Product product;
     private ImageView mImageView;
     private Uri mUri;
@@ -53,11 +48,10 @@ public class ProductDetail extends AppCompatActivity {
         textViewStock.setText(product.getStock() + "");
         textViewQuantityToPurchase.setText(product.getQuantityToPurchase() + "");
 
-        Button sale = (Button) findViewById(R.id.button_sale);
-        Button receive = (Button) findViewById(R.id.button_receive);
-        Button order = (Button) findViewById(R.id.button_order);
-        Button delete = (Button) findViewById(R.id.button_delete);
-        Button addPhoto = (Button) findViewById(R.id.add_photo);
+        ImageButton sale = (ImageButton) findViewById(R.id.button_sale);
+        ImageButton receive = (ImageButton) findViewById(R.id.button_receive);
+        ImageButton order = (ImageButton) findViewById(R.id.button_order);
+        ImageButton delete = (ImageButton) findViewById(R.id.button_delete);
 
         sale.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,13 +92,6 @@ public class ProductDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showDeleteConfirmationDialog();
-            }
-        });
-
-        addPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openImageSelector();
             }
         });
     }
@@ -149,43 +136,5 @@ public class ProductDetail extends AppCompatActivity {
         alert.show();
     }
 
-    public void openImageSelector() {
-        Intent intent;
-
-        if (Build.VERSION.SDK_INT < 19) {
-            intent = new Intent(Intent.ACTION_GET_CONTENT);
-        } else {
-            intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
-        }
-
-        intent.setType("image/*");
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_IMAGE_CAPTURE);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
-        Log.i(LOG_TAG, "Received an \"Activity Result\"");
-        // The ACTION_OPEN_DOCUMENT intent was sent with the request code READ_REQUEST_CODE.
-        // If the request code seen here doesn't match, it's the response to some other intent,
-        // and the below code shouldn't run at all.
-
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-            // The document selected by the user won't be returned in the intent.
-            // Instead, a URI to that document will be contained in the return intent
-            // provided to this method as a parameter.  Pull that uri using "resultData.getData()"
-
-            if (resultData != null) {
-                mUri = resultData.getData();
-                Log.i(LOG_TAG, "Uri: " + mUri.toString());
-
-                String id = ProductContract.ProductEntry.COLUMN_PRODUCT_ID + " = " + product.getId();
-                ContentValues values = new ContentValues();
-                values.put(ProductContract.ProductEntry.COLUMN_PRODUCT_IMAGE, mUri.toString());
-                getContentResolver().update(ProductContract.ProductEntry.CONTENT_URI, values, id, null);
-                mImageView.setImageURI(mUri);
-            }
-        }
-    }
 }
 

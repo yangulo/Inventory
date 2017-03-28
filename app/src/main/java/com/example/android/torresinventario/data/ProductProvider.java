@@ -14,22 +14,19 @@ public class ProductProvider extends ContentProvider {
 
     // Tag for the log messages
     private static final String LOG_TAG = ProductProvider.class.getSimpleName();
-
-    //Database helper object
-    private ProductDbHelper mProductDbHelper;
-
     // URI matcher code for the content URI for the ProductInformation table
     private static final int PRODUCTS = 100;
-
     // URI matcher code for the content URI for a single product in the ProductInformation table
     private static final int PRODUCTS_ID = 101;
-
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
         sUriMatcher.addURI(ProductContract.CONTENT_AUTHORITY, ProductContract.PATH_PRODUCT_INFORMATION, PRODUCTS);
         sUriMatcher.addURI(ProductContract.CONTENT_AUTHORITY, ProductContract.PATH_PRODUCT_INFORMATION + "/#", PRODUCTS_ID);
     }
+
+    //Database helper object
+    private ProductDbHelper mProductDbHelper;
 
     @Override
     public boolean onCreate() {

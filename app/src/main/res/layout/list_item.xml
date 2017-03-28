@@ -45,6 +45,7 @@
         android:textAppearance="?android:textAppearanceMedium"
         android:textColor="#2B3D4D"
         android:layout_marginRight="16dp"
+        android:layout_marginTop="10dp"
         android:text="$"/>
 
     <TextView
@@ -56,12 +57,14 @@
         android:textAppearance="?android:textAppearanceMedium"
         android:textColor="#2B3D4D"
         android:layout_marginRight="16dp"
+        android:layout_marginTop="10dp"
         tools:text="10.50"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/list_view_sale_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sale"/>
+        android:src="@drawable/sale"
+        android:background="#ffffff"/>
 
 </LinearLayout>
